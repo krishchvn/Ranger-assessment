@@ -26,10 +26,11 @@ export async function run(page: Page) {
         console.log('No previous TODO items');
     }
 
-    const todoItemsString = prevTodoItemsString + [...TODO_ITEMS].join('');
+    const todoItemsString: string =
+        prevTodoItemsString + [...TODO_ITEMS].join('');
 
     // Sorting the string as to check later
-    const sortedTodoItemsString = [...prevTodoItems, ...TODO_ITEMS]
+    const sortedTodoItemsString: string = [...prevTodoItems, ...TODO_ITEMS]
         .sort()
         .join('');
 
@@ -47,7 +48,7 @@ export async function run(page: Page) {
         await page.getByTestId('add-todo').click();
         await page.waitForTimeout(300);
 
-        const existingElements = await page
+        const existingElements: any = await page
             .locator(`text="${TODO_ITEMS[i]}"`)
             .count();
         if (existingElements < 2) {
@@ -64,7 +65,7 @@ export async function run(page: Page) {
     // Fetches all text contents and verifies the order, else returns error
 
     page.waitForSelector('ul');
-    const topLevelUl_1 = await page.locator('ul').allTextContents();
+    const topLevelUl_1: string[] = await page.locator('ul').allTextContents();
     console.log('Fetched Items String:', topLevelUl_1[0]);
     console.log('Original Items String:', todoItemsString);
 
@@ -79,7 +80,7 @@ export async function run(page: Page) {
 
     // Again fetches all text contents and verifies the order, else returns error
     await page.waitForSelector('ul');
-    const topLevelUl_2 = await page.locator('ul').allTextContents();
+    const topLevelUl_2: string[] = await page.locator('ul').allTextContents();
     console.log('Fetched Items:', topLevelUl_2[0]);
     console.log('Sorted Items:', sortedTodoItemsString);
 

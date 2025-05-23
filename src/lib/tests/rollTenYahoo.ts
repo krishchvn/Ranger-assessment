@@ -21,7 +21,7 @@ export async function run(page: Page) {
 
     await page.getByRole('button', { name: 'Roll Dice' }).click();
 
-    const result = await page.getByText('You rolled 10!').textContent();
+    const result: any = await page.getByText('You rolled 10!').textContent();
     expect(result).toContain('Yahoo!');
 
     // ----------------------------------------------------------------------------

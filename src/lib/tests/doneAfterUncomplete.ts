@@ -10,7 +10,7 @@ export async function run(page: Page) {
 
     // Check if any todo items are present, else return
     await page.waitForSelector('ul > li');
-    const ul = page.locator('ul > li');
+    const ul: any = page.locator('ul > li');
     if (ul === null) {
         throw new Error('no tasks to do');
     }
@@ -22,7 +22,7 @@ export async function run(page: Page) {
     console.log(liTexts);
 
     // Taking a random todo item and marks it as checked
-    const randomIndex = Math.floor(Math.random() * liTexts.length);
+    const randomIndex: number = Math.floor(Math.random() * liTexts.length);
     console.log(
         'Random index:',
         randomIndex,
@@ -31,7 +31,7 @@ export async function run(page: Page) {
     );
 
     await page.getByRole('checkbox').nth(randomIndex).click();
-    const randomLiText = liTexts[randomIndex];
+    const randomLiText: string = liTexts[randomIndex];
 
     // Page reload
     await page.reload();
